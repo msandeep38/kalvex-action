@@ -1,0 +1,20 @@
+{
+  "name": "kalvex-action",
+  "version": "1.0.0",
+  "description": "AI-powered Solidity vulnerability scanner for GitHub Actions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js -o dist --source-map --license licenses.txt",
+    "prepare": "npm run build"
+  },
+  "keywords": ["solidity", "smart-contract", "security", "audit", "web3", "defi"],
+  "author": "Sandeep Mulpur",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.1"
+  }
+}

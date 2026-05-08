@@ -1,0 +1,42 @@
+name: Kalvex Smart Contract Audit
+
+on:
+  pull_request:
+    paths:
+      - '**.sol'
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - '**.sol'
+
+jobs:
+  audit:
+    name: Smart Contract Security Audit
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Kalvex Audit
+        id: kalvex
+        uses: msandeep38/kalvex-action@v1
+        with:
+          api-key: ${{ secrets.KALVEX_API_KEY }}
+          contracts-path: 'contracts/'
+          fail-on: 'CRITICAL'
+          comment-on-pr: 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print Summary
+        run: |
+          echo "Verdict: ${{ steps.kalvex.outputs.verdict }}"
+          echo "Total findings: ${{ steps.kalvex.outputs.findings-count }}"
+          echo "Critical: ${{ steps.kalvex.outputs.critical-count }}"
+          echo "High: ${{ steps.kalvex.outputs.high-count }}"

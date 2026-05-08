@@ -1,0 +1,44 @@
+name: 'Kalvex Smart Contract Audit'
+description: 'AI-powered Solidity vulnerability scanner. Audits smart contracts on every PR — flags reentrancy, selfdestruct, oracle manipulation, and 66 more vulnerabilities.'
+author: 'Kalvex'
+
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  api-key:
+    description: 'Your Kalvex API key. Get a free key at kalvex.io/get-api-key'
+    required: true
+  contracts-path:
+    description: 'Path to Solidity files or directory to audit (e.g. contracts/ or contracts/MyToken.sol)'
+    required: false
+    default: 'contracts/'
+  fail-on:
+    description: 'Fail the build if findings at or above this severity are found. Options: CRITICAL, HIGH, MEDIUM, LOW, NONE'
+    required: false
+    default: 'CRITICAL'
+  comment-on-pr:
+    description: 'Post audit results as a PR comment'
+    required: false
+    default: 'true'
+  base-url:
+    description: 'Kalvex API base URL (override for self-hosted)'
+    required: false
+    default: 'https://kalvex.io'
+
+outputs:
+  verdict:
+    description: 'Audit verdict: DO_NOT_DEPLOY, HIGH_RISK, REVIEW_REQUIRED, or SAFE_TO_DEPLOY'
+  findings-count:
+    description: 'Total number of findings'
+  critical-count:
+    description: 'Number of CRITICAL findings'
+  high-count:
+    description: 'Number of HIGH findings'
+  report-url:
+    description: 'URL to the full Kalvex audit report'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
