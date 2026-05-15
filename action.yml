@@ -1,5 +1,5 @@
 name: 'Kalvex Smart Contract Audit'
-description: 'AI-powered smart contract security audit. 150+ detectors, Foundry PoCs, DO NOT DEPLOY verdicts. Trained on 64 real DeFi hacks worth $15B.'
+description: 'AI smart contract auditor. 150+ detectors, Foundry PoCs, DO NOT DEPLOY verdicts.'
 author: 'msandeep38'
 
 branding:
